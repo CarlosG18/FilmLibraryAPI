@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'apps.filme.apps.FilmeConfig',
+    'apps.usuario.apps.UsuarioConfig',
     'django.contrib.staticfiles',
     'rest_framework',
 ]
