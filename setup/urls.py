@@ -18,10 +18,19 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.conf import settings
+from rest_framework import routers
+from apps.filme.views import FilmeViewSet, CategoriaViewSet
 
+
+# criando o router
+router = routers.DefaultRouter()
+
+router.register('filmes', FilmeViewSet, basename="Filmes")
+router.register('categorias', CategoriaViewSet, basename="Categorias")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),
     path('', include('apps.filme.urls')),
     path('', include('apps.usuario.urls')),
 ]
