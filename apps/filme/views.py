@@ -6,6 +6,8 @@ from .models import Filme, Categoria
 class FilmeViewSet(viewsets.ModelViewSet):
     queryset = Filme.objects.all()
     serializer_class = FilmeSerializer
+    
+    
 
 class CategoriaViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all()

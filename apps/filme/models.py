@@ -9,9 +9,9 @@ class Categoria(models.Model):
     
 class Filme(models.Model):
     nome = models.CharField(max_length=200)
-    ano = models.DateField()
-    categoria = models.ManyToManyField(Categoria)
-    imagem = models.ImageField(upload_to='filmes/')
+    ano_de_estreia = models.DateField()
+    categorias = models.ManyToManyField(Categoria, blank=True)
+    poster = models.ImageField(upload_to='filmes/')
 
     def __str__(self) -> str:
         return self.nome
