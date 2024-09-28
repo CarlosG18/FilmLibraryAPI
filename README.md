@@ -16,30 +16,62 @@ O desafio consiste em desenvolver uma API de um sistema para gerenciamento de in
 
 - CRUD (Create, Read, Update, Delete) para gerenciar informações de filmes.
 
-- Integração com OAuth2 para geração e gerenciamento de tokens de acesso.
+- Utilização do authtoken para geração de tokens de acesso.
 
 ##  🔗 Endpoints
 
 1. **Autenticação de Usuários**:
 
-    - POST **/api/register/**: Registro de novos usuários.
-    - POST **/api/login/**: Autenticação de usuários e geração de token de acesso.
-    - POST **/api/logout/**: Logout e invalidação do token de acesso.
-
+    - POST **/cadastro/**: Registro de novos usuários.
+    
+    nesse endpoint voce poderá criar um novo usuario enviando como body o seguinte `JSON`:
+    
+    ```JSON
+    {
+      "username": "usuario",
+      "password": "senha"
+    }
+    ```
+    
+    com o usuario criado com sucesso, voce terá que solicitar o token para poder acessar os endpoints de filmes. para gerar o token basta acessar o seguinte endpoint:
+    
+    - POST **/generate-token/**: Geração do token.
+    
+    sendo enviado no body da requisição o `JSON` no seguinte formato:
+    
+    ```JSON
+    {
+      "username": "usuario",
+      "password": "senha"
+    }
+    ```
+    
 ---
 2. **Filmes** (CRUD):
 
-    - GET **/api/movies/**: Listar todos os filmes.
-    - GET **/api/movies/{id}/**: Detalhar um filme específico.
-    - POST **/api/movies/**: Criar um novo filme.
-    - PUT **/api/movies/{id}/**: Atualizar as informações de um filme existente.
-    - DELETE **/api/movies/{id}/**: Deletar um filme.
+    Lembrando que para acessar todos os endpoints de Filmes da API voce deverá informar o token obtido anteriormente no cabeçalho HTTP de **authorization** de sua requisição. Veja essa exemplo em python:
 
+    ```py
+    import requests
+
+    headers = {
+      "Authorization": "Token abc123xyz"
+    }
+    
+    response = requests.get('http://127.0.0.1:8000/api/endpoint_protegido/', headers=headers)
+    ```
+
+    - GET **/filmes/**: Listar todos os filmes.
+    - GET **/filmes/{id}/**: Detalhar um filme específico.
+    - POST **/filmes/**: Criar um novo filme.
+    - PUT **/filmes/{id}/**: Atualizar as informações de um filme existente.
+    - DELETE **/filmes/{id}/**: Deletar um filme.
+    
 ---
-3. **Tokens de Autorização OAuth2**:
+3. **Categorias** (CRUD):
 
-    - POST **/api/token/**: Geração de token OAuth2.
-    - POST **/api/token/refresh/**: Atualizar um token expirado.
-    - POST **/api/token/revoke/**: Revogar um token de acesso.
-
-
+    - GET **/categorias/**: Listar todas as categorias.
+    - GET **/categorias/{id}/**: Detalhar uma categoria específica.
+    - POST **/categorias/**: Criar uma nova categoria.
+    - PUT **/categorias/{id}/**: Atualizar as informações de uma categoria existente.
+    - DELETE **/categoria/{id}/**: Deletar uma categoria.
