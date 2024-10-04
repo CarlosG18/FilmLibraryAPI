@@ -5,7 +5,7 @@ from .models import Filme, Categoria
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication
 
 class CreateUser(APIView):
     permission_classes = [AllowAny]
@@ -37,4 +37,4 @@ class FilmeViewSet(viewsets.ModelViewSet):
 class CategoriaViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all()
     serializer_class = CartegoriaSerializer
-
+    permission_classes = [AllowAny]
